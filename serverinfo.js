@@ -56,6 +56,14 @@ var ServerInfoApi = function () {
 			}
 			self.data['uptime'] = parseInt(stdout.split('\n')[0]);
 		});
+		self.data['kernel'] = [];
+                exec('uname -r', function (error, stdout, stderr) {
+                        if(error != null) {
+                                console.log(error);
+                                return false;
+                        }
+                        self.data['kernel'] = stdout;
+                });
 	};
 
 	var onRequest = function(request, response) {
